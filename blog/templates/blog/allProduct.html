@@ -1,0 +1,91 @@
+{% extends "blog/basePage.html" %}
+{#{% use "productInList.html" %}#}
+{% load staticfiles %}
+{%  block stylesheets %}
+   {{ block.super }}
+    <link rel="stylesheet" href="{% static "css/mySelect.css" %}" />
+{%  endblock %}
+
+{% block content%}
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+
+            <h4 class="modal-title" id="myModalLabel">Выбирите материал для поиска</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <div class="row">
+                  <div class="col-lg-8 mx-auto" style="background-color: #e7fff5">
+                      <div class="div1">
+
+                          {% for currentMaterial in materials %}
+                              <input type="checkbox" class="myCheckBox" name="name1" data-item="{{currentMaterial.title}}" value="{{currentMaterial.id}}">{{currentMaterial.title}}<Br>
+
+
+                          {% endfor %}
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button id="saveChangeMaterial" type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="content-wrapper" class="myColorElem" >
+
+        <div class="row mx-2">
+            <div class="col-lg-12">
+{#                 <form method="get">#}
+                <input id="myInput" name="myInput" type="text" placeholder="Искать здесь...">
+                <button id="btnFind" type="submit"><i class="fas fa-search"></i></button>
+
+            </div>
+        </div>
+        <div class="row mx-2 mt-3 mb-4">
+            <div class="col-lg-12 row">
+                <div class="col-lg-3  " >
+                    <a href="#" id="btnChoiceMaterial" class="button" data-toggle="modal" data-target="#myModal">Выбор материала</a>
+                </div>
+                <div id="spisokMaterials" class="col-lg-9 " > 2 </div>
+            </div>
+        </div>
+
+
+        <div class="bg-white mx-2 ">
+            <div class="row"></div>
+
+
+        <div class="form-group" id="Prods">
+            {% for currentProduct in products %}
+                {% include "blog/productInList.html" with currentProduct=currentProduct %}
+
+{#                {% block productInList %}#}
+{##}
+{#                    {{ parent(currentMaterial)}}#}
+{##}
+{#                {% endblock %}#}
+
+            {% endfor %}
+        </div>
+
+        </div>
+
+     >
+
+    </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ block.super }}
+    <script src="{% static 'js/kek.js' %}"></script>
+{% endblock %}

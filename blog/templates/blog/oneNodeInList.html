@@ -1,0 +1,44 @@
+{%  load staticfiles %}
+{% block oneIntem %}
+    <li>
+        {% csrf_token %}
+        <button class="w-100 row  p-1 mx-auto" onclick="addInMap({{material.id}}, {{positionMap.getTechnologyMap.id}} )">
+        {% csrf_token %}
+        <button class="w-100 row  p-1 mx-auto" onclick="addInMap({{material.id}}, {{positionMap.id}} )">
+
+            <div class=" row col-lg-4  d-inline my-auto">
+                <img src=" {% static '' %}{{ material.img }}" class="img-fluid">
+            </div>
+
+            <div class="row col-lg-9 d-inline">
+
+                <div class="col-lg-11 d-block col-12">
+                    <p class="myTextFont h4">{{ material.title }}</p>
+                </div>
+
+                <div class="d-block col-11">
+                    <div class="col-lg-5 d-inline col-5">
+                        <span class="myTextColorSpecification myTextFont myTextSizeSpecification"> Код товара: </span>
+                    </div>
+                    <div class="col-lg-4 d-inline col-4">
+                        <span class="myTextColorSpecification myTextFont myTextSizeSpecification">{{ material.code_material }}</span>
+                    </div>
+                </div>
+
+                <div class="d-block col-11">
+
+                    <div class="col-lg-5 d-inline col-5">
+                        <span class="myTextColorSpecification myTextFont myTextSizeSpecification"> Остаток на складе: </span>
+                    </div>
+
+                    <div class="col-lg-4 d-inline col-4">
+                        <span class="myTextColorSpecification myTextFont myTextSizeSpecification">{{  material.balance }}</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </button>
+    </li>
+{% endblock %}

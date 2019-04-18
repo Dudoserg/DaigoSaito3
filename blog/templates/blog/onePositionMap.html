@@ -1,0 +1,52 @@
+{% load  staticfiles %}
+{% block positionOnMap %}
+<li class="list-group-item text-center" id="position{{ positionMap.id }}">
+    <div class="row">
+        <div class="w-100 row mx-auto">
+            <div class="col-lg-2 col-md-4 d-inline">
+                <img src="{% static '' %}{{ positionMap.material.img }}" class="img-fluid">
+            </div>
+
+            <div class="row col-lg-8 col-md-8 d-inline ml-2">
+
+                <div class="col-md-11 d-block col-12">
+                    <p class="myTextFont h3">
+                        {{ positionMap.material.title }}
+                    </p>
+                </div>
+
+                <div class="d-block col-11">
+
+                    <div class="col-md-5 d-inline col-5">
+                        <span class="myTextColorSpecification myTextFont myTextSizeSpecification"> Код товара: </span>
+                    </div>
+
+                    <div class="col-md-2 d-inline col-4">
+                        <span class="myTextColorSpecification myTextFont myTextSizeSpecification">{{ positionMap.code_material }}</span>
+                    </div>
+
+                </div>
+
+                {#<div class="d-block col-11">#}
+                    {#<div class="col-lg-5 d-inline col-5">#}
+                        {#<span class="myTextColorSpecification myTextFont myTextSizeSpecification"> Требуется: </span>#}
+                    {#</div>#}
+                    {#<div class="col-lg-4 d-inline col-4">#}
+                        {#<span class="myTextColorSpecification myTextFont myTextSizeSpecification"> 1 кг.</span>#}
+                    {#</div>#}
+                {#</div>#}
+
+            </div>
+
+            <div class="col-lg-2  col-md-12 d-inline">
+                <p class="myTextFont h5">Кол-во:</p>
+                {% csrf_token %}
+                <input id="{{ positionMap.id }}" onchange="changeAmountMaterial( {{ positionMap.id }} )"
+                       class="form-control form-control-sm" width=100 value="{{ positionMap.amount }}" />
+            </div>
+
+        </div>
+
+    </div>
+</li>
+{% endblock %}

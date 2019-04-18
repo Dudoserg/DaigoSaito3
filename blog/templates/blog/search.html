@@ -1,0 +1,5 @@
+<div class="form-group" id="Prods">
+            {% for currentProduct in products %}
+                {% include "blog/productInList.html" with currentProduct=currentProduct %}
+            {% endfor %}
+</div>

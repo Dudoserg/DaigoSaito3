@@ -1,0 +1,26 @@
+создать бд
+python manage.py migrate
+
+что касается бд
+python manage.py makemigrations blog
+python manage.py migrate blog
+
+
+Запулить забив на твои изменения
+git fetch --all
+git reset --hard origin/master
+
+
+выбрать virtualenv
+myvenv\Scripts\activate
+
+
+запустить сервак
+python manage.py runserver
+
+pip3.6 install --user pythonanywhere
+pa_autoconfigure_django.py https://github.com/Dudoserg/DaigoSaito2.git
+pa_autoconfigure_django.py -- nuke https://github.com/Dudoserg/DaigoSaito2.git
+python manage.py createsuperuser
+
+

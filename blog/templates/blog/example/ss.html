@@ -1,0 +1,34 @@
+{% load staticfiles %}
+<html lang="ru">
+
+<head>
+
+</head>
+
+<body >
+{#это базовая страница#}
+
+<h1> Кликай вот на этого счастливого обладателя подкрылок, чтобы попасть на сайт </h1>
+
+<h1> <a href="{% url 'product'  %}" class="myHref">
+     <img src="{% static "diman.jpg" %}" class="img-fluid">
+</a>
+
+
+ <form enctype="multipart/form-data" method="post">
+   <p><input type="file" name="f">
+   <input type="submit" value="Отправить"></p>
+  </form>
+
+<br>
+
+{% block content %}
+    собака, зарытая
+
+    в шаблоне <br>
+{% endblock %}
+{%  block dwa %}
+{% endblock %}
+</body>
+
+</html>

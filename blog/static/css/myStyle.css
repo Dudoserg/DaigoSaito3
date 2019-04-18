@@ -1,0 +1,134 @@
+.myColorElem{
+    background-color : rgba(237, 237, 237, 0.82);
+}
+.myTextColorSpecification{
+    color : rgba(96, 96, 96, 0.82);
+}
+.myTextFont{
+    font-family: "PTSans","Helvetica","Arial",sans-serif;
+}
+.myTextSizeSpecification{
+    font-size: 14px;
+}
+A.myHref{
+    text-decoration: none;
+    color : black;
+}
+A.myHref:hover{
+    text-decoration: none;
+    color : #1d6e66;
+}
+@media (min-width: 1200px) {
+   .mySizePrice {
+        font-size: 30px;
+    }
+}
+@media (max-width: 1200px) {
+    .mySizePrice {
+        font-size: 25px;
+    }
+}
+
+.myOtstup{
+    .mt-3;
+    .mx-1;
+}
+
+#btn {display: inline-block;
+  color: white;
+  text-decoration: none;
+  padding: .5em 2em;
+  outline: none;
+  border-width: 2px 0;
+  border-style: solid none;
+  /*border-color: #FDBE33 #000 #D77206;*/
+  border-color: #61c156 #000 #5db92d;
+  border-radius: 6px;
+  /*background: linear-gradient(#F3AE0F, #E38916) #E38916;*/
+  background: linear-gradient(#61c156, #81c833) #5db92d;
+
+  transition: 0.2s;
+}
+#ok {
+    display: inline-block;
+  color: white;
+  text-decoration: none;
+  padding: .5em 2em;
+  outline: none;
+  border-width: 2px 0;
+  border-style: solid none;
+  border-color: #61c156 #000 #5db92d;
+  border-radius: 6px;
+  background: linear-gradient(#61c156, #81c833) #5db92d;
+  transition: 0.2s;
+}
+
+
+
+
+
+* {box-sizing: border-box;}
+form {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+input#myInput {
+  width: 100%;
+  height: 42px;
+  padding-left: 10px;
+  border: 2px solid #7BA7AB;
+  border-radius: 5px;
+  outline: none;
+  background: #f8f4f9;
+  color: #9E9C9C;
+}
+#btnFind {
+  position: absolute;
+  top: 0;
+  right: 0px;
+  width: 42px;
+  height: 42px;
+  border: none;
+  background: #7BA7AB;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+#btnFind:before {
+  /*content: "\f002";*/
+  font-family: FontAwesome;
+  font-size: 16px;
+  color: #F9F0DA;
+}
+ /*============================================================*/
+ /*Кнопка поиска по материалам*/
+#btnChoiceMaterial {
+  position: relative;
+  display: inline-block;
+  font-size: 90%;
+  font-weight: 700;
+  color: rgb(209,209,217);
+  text-decoration: none;
+  text-shadow: 0 -1px 2px rgba(0,0,0,.2);
+  padding: .5em 1em;
+  outline: none;
+  border-radius: 3px;
+  background: linear-gradient(rgb(110,112,120), rgb(81,81,86)) rgb(110,112,120);
+  box-shadow:
+   0 1px rgba(255,255,255,.2) inset,
+   0 3px 5px rgba(0,1,6,.5),
+   0 0 1px 1px rgba(0,1,6,.2);
+  transition: .2s ease-in-out;
+}
+#btnChoiceMaterial:hover:not(:active) {
+  background: linear-gradient(rgb(126,126,134), rgb(70,71,76)) rgb(126,126,134);
+}
+#btnChoiceMaterial:active {
+  top: 1px;
+  background: linear-gradient(rgb(76,77,82), rgb(56,57,62)) rgb(76,77,82);
+  box-shadow:
+   0 0 1px rgba(0,0,0,.5) inset,
+   0 2px 3px rgba(0,0,0,.5) inset,
+   0 1px 1px rgba(255,255,255,.1);
+}
+/*============================================================*/
