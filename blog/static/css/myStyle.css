@@ -73,7 +73,7 @@ form {
   width: 100%;
   margin: 0 auto;
 }
-input#myInput {
+input.myInputStyle {
   width: 100%;
   height: 42px;
   padding-left: 10px;
@@ -132,3 +132,17 @@ input#myInput {
    0 1px 1px rgba(255,255,255,.1);
 }
 /*============================================================*/
+
+#parent {
+  display: table;
+  width:100%;
+
+  height:100%;
+}
+
+#child {
+    display: table-cell;
+    vertical-align: middle;
+
+    text-align:center;
+}

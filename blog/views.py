@@ -17,10 +17,9 @@ from blog.forms import DocumentForm
 
 from django.conf.urls.static import static
 from django.conf import settings as djangoSettings
-#
+
 from django.views.generic import ListView
 from django.db.models import Q
-#
 
 import hashlib
 from PIL import Image
@@ -32,44 +31,41 @@ import json
 from django.db.models import Count
 # Create your views here.
 
-def base(request ):
-    print("zdarova blyt")
 
-    return render(request, 'blog/example/post_list.html')
-
-def post_list(request, pk ):
-    print(pk)
-    return render(request, 'blog/example/post_list.html', {})
+#
+# def post_list(request, pk ):
+#
+#     return render(request, 'blog/example/post_list.html', {})
 
 #
     # class PlaceListView(ListView):
     #
     #     model = Place
 
-
-@csrf_exempt
-def get_queryset(request):
-# Получаем не отфильтрованный кверисет всех моделей
-
-
-    # q_list = [Q(question__startswith='Who'), Q(question__startswith='What')]
-    # products = Product.objects.filter
-    #
-    #
-    # queryset = super (FlavorListView, self).get_queryset()
-    # q = self.request.GET.get("q")
-    # if q: # Если 'q' в GET запросе, фильтруем кверисет по данным из 'q'
-    #     return queryset.filter(Q(name__icontains=q)| Q(keywords__icontains=q))
-    #
-    # title = request.POST["Prods"]
-    lst = request.POST['Prods']
-    products = Product.objects.all()[0]
-    # products = Product.objects.filter(id=1)[0]
-
-    data = {'products': products}
-    lst = render (request, 'blog/ProductsBlock.html', context=data)
-    # return render (request, 'blog/ProductsBlock.html', context=data)
-
+#
+# @csrf_exempt
+# def get_queryset(request):
+# # Получаем не отфильтрованный кверисет всех моделей
+#
+#
+#     # q_list = [Q(question__startswith='Who'), Q(question__startswith='What')]
+#     # products = Product.objects.filter
+#     #
+#     #
+#     # queryset = super (FlavorListView, self).get_queryset()
+#     # q = self.request.GET.get("q")
+#     # if q: # Если 'q' в GET запросе, фильтруем кверисет по данным из 'q'
+#     #     return queryset.filter(Q(name__icontains=q)| Q(keywords__icontains=q))
+#     #
+#     # title = request.POST["Prods"]
+#     lst = request.POST['Prods']
+#     products = Product.objects.all()[0]
+#     # products = Product.objects.filter(id=1)[0]
+#
+#     data = {'products': products}
+#     lst = render (request, 'blog/ProductsBlock.html', context=data)
+#     # return render (request, 'blog/ProductsBlock.html', context=data)
+#
 
 
 #
@@ -81,26 +77,15 @@ def product(request):
 
     products = Product.objects.all()
 
-    # class PlaceListView(ListView): model = Place
-    #
-    # def get_queryset(self):
-    # # Получаем не отфильтрованный кверисет всех моделей
-    #     queryset = super(FlavorListView, self).get_queryset()
-    #     q = self.request.GET.get("q")
-    #     if q: # Если 'q' в GET запросе, фильтруем кверисет по данным из 'q'
-    #         return queryset.filter(Q(name__icontains=q)| Q(keywords__icontains=q))
-    #     return queryset
     if 'myInput' in request.GET:
         print(request.GET['myInput'])
 
-
     # Если используем поиск, запрос которого пришел по аяксу
-
     if 'data' in request.GET:
         print("ajax")
-        b = foobar(request.GET['data'])
-        inputField = b['input']
-        arrCheckBox = b['arr']
+        dataFromJson = foobar(request.GET['data'])
+        inputField = dataFromJson['input']
+        arrCheckBox = dataFromJson['arr']
         print(inputField)
         for i in range(0, len(arrCheckBox)):
             print(arrCheckBox[i])
@@ -139,8 +124,29 @@ def product(request):
 
         # Теперь займемся поиском по словам
         lenght = len(inputField)
-        if(lenght > 5):
-            products = products.filter(Q(title__contains=inputField)  | Q(description__contains=inputField))
+
+        q_objects = Q()
+        if(len(inputField) > 0):
+            q_objects.add(Q(title__contains=inputField), Q.OR)
+            q_objects.add( Q(description__contains=inputField), Q.OR)
+
+        if dataFromJson['code']:
+            count = int(dataFromJson['code'])
+            q_objects.add(Q(code=count), Q.AND)
+        if dataFromJson['amountFrom']:
+            amountFrom = int(dataFromJson['amountFrom'])
+            q_objects.add(Q(), Q.AND)
+        if dataFromJson['amountFrom']:
+            amountFrom = int(dataFromJson['amountFrom'])
+            q_objects.add(Q(balance__gte=amountFrom), Q.AND)
+        if dataFromJson['amountTo']:
+            amountTo = int(dataFromJson['amountTo'])
+            q_objects.add(Q(balance__lte=amountTo), Q.AND)
+        # if(lenght > 5):
+        products = products.filter(q_objects)
+
+
+
 
         allMaterials = Material.objects.all()
         data = {'products': products, 'materials': allMaterials}
@@ -332,3 +338,5 @@ def productEditPosition(request, idparam):
 #         context_instance=RequestContext(request)
 #     )
 
+def base(request):
+    return render(request, 'blog/example/post_list.html')

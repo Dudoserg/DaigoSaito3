@@ -52,12 +52,18 @@ $('#btnFind').click(function () {
 	}
 
 
-     let findInput = document.getElementById('myInput').value;
+	let findInput = document.getElementById('myInput').value;
+	let amountFrom = document.getElementById('myInputAmountFrom').value;
+	let amountTo = document.getElementById('myInputAmountTo').value;
+	let code = document.getElementById('myInputCode').value;
 
-    let obj = {
-	  arr: arr,
-      input : findInput
-    };
+	let obj = {
+		arr: arr,
+		input : findInput,
+		amountFrom : amountFrom,
+		amountTo : amountTo,
+		code : code
+	};
 	let jsonString = JSON.stringify(obj);
 
 

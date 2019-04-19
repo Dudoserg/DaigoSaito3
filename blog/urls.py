@@ -21,9 +21,9 @@ urlpatterns = [
     path('product/<int:idparam>/editPosition', views.productEditPosition, name='productEditPosition'),
 
 
-    path('zlp/<int:pk>/', views.post_list, name='asdf'),
+    # path('zlp/<int:pk>/', views.post_list, name='asdf'),
 
-    path('product/place_search', views.get_queryset, name='place_search')
+    # path('product/place_search', views.get_queryset, name='place_search')
 
 ]
 
