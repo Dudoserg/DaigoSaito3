@@ -116,6 +116,7 @@ function addPositionMap( id ) {
         success: function(html)
         {
             alert(html);
+
         }
     });
 }

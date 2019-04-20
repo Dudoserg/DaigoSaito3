@@ -79,3 +79,22 @@ $('#btnFind').click(function () {
     });
 
 });
+
+
+function btnDelete(num) {
+	let dataString = "num=" + num ;
+	 $.ajax({
+        type: "POST",
+        url: "product/delete",
+        data: dataString,
+        cache: false,
+        success: function(result)
+        {
+             alert(result);
+             let div = document.getElementById("product" + num);
+             div.parentNode.removeChild(div);
+             div = document.getElementById("dropdown" + num);
+             div.parentNode.removeChild(div);
+        }
+    });
+}

@@ -237,17 +237,29 @@ def productEdit(request, idparam):
     materials = Material.objects.all()
 
     map = Technology_map.objects.filter(product_id=idparam)
+    if len(map) > 0:
+        map = map[0]
 
-    map = map[0]
+        positions = Technology_map_position.objects.filter(technology_map_id=map.id)
 
-    positions = Technology_map_position.objects.filter(technology_map_id=map.id)
+        data = {'product' : product,
+                'materials' : materials,
+                'positions' : positions,}
 
-    data = {'product' : product,
-            'materials' : materials,
-            'positions' : positions}
+        return render(request, 'blog/test.html', context=data)
+    else:
+        # нужно добавить новую карту
+        technology_map = Technology_map()
+        technology_map.date_start = "2019-03-09"
+        technology_map.date_end = "2019-03-09"
+        technology_map.product_id = idparam
+        technology_map.save()
 
-    return render(request, 'blog/test.html', context=data)
+        data = {'product': product,
+                'materials': materials,
+                'positions': []}
 
+        return render(request, 'blog/test.html', context=data)
 # выполняет редактирование информации о продукте через Аjax
 @csrf_exempt
 def productEditajax(request, idparam):
@@ -340,3 +352,75 @@ def productEditPosition(request, idparam):
 
 def base(request):
     return render(request, 'blog/example/post_list.html')
+
+@csrf_exempt
+def product_delete(request):
+    if request.POST.get('num'):
+        num =  request.POST['num']
+        print(num)
+        str = Product.objects.filter(id=num)[0].title
+        product = Product.objects.get(id=num).delete()
+        return HttpResponse("Element " + str + " deleted!")
+    else:
+        return HttpResponse("Error2")
+
+@csrf_exempt
+def productAdd(request):
+
+    if 'title' in request.POST and 'code' in request.POST and 'balance' in request.POST and 'description' in request.POST:
+        lenght = len(request.FILES)
+        if lenght > 0:
+            # обрабатываем и сохраняем картинку
+            elem = request.FILES.get('0')
+            name = saveFile(elem)
+            print(name)
+            # теперь инфомарцию о продукте
+            print("ajax")
+            title = (request.POST['title'])
+            print(title)
+            code = (request.POST['code'])
+            print(code)
+            balance = (request.POST['balance'])
+            print(balance)
+            description = (request.POST['description'])
+            print(description)
+            newProduct = Product()
+            newProduct.title = title
+            newProduct.code = code
+            newProduct.balance = balance
+            newProduct.description = description
+            newProduct.img = "img/" + name
+            newProduct.save()
+
+
+
+
+    return render(request, 'blog/productAdd.html')
+
+
+def saveFile(up_file):
+    #print(up_file)
+    tmpName = "tmp.jpg"
+    destination = open(djangoSettings.IMG_ROOT + "/" + tmpName, 'wb+')
+    for chunk in up_file.chunks():
+        destination.write(chunk)
+    destination.close()
+    # img = someImage()
+
+    img = Image.open(djangoSettings.IMG_ROOT + "/" + tmpName)
+
+    m = hashlib.md5()
+    with io.BytesIO() as memf:
+        img.save(memf, 'PNG')
+        data = memf.getvalue()
+        m.update(data)
+    #print(m.hexdigest())
+    # переименовываем загруженный файл
+    newName = str(m.hexdigest()) + ".jpg"
+    # если файл существует
+    if (os.path.exists(djangoSettings.IMG_ROOT + "/" + newName) == True):
+        # удалим файл
+        os.remove(djangoSettings.IMG_ROOT + "/" + newName)
+
+    os.rename(djangoSettings.IMG_ROOT + "/" + tmpName, djangoSettings.IMG_ROOT + "/" + newName)
+    return newName

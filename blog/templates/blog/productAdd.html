@@ -1,0 +1,104 @@
+{% extends "blog/basePage.html" %}
+{%  load staticfiles %}
+{#{% use "oneNodeInList.html" %}#}
+{#{% use "onePositionMap.html" %}#}
+{%  block stylesheets %}
+          {{ block.super }}
+    <link rel="stylesheet" href="{% static "css/productAdd.css" %}" />
+{% endblock %}
+
+{% block content%}
+
+
+
+
+    <!-- <input id="technology_map_id" value=""> -->
+
+    <div id="content-wrapper" class="myColorElem" >
+
+        <div class="row">
+            <span class="lg-col-12 sm-col-4 h1 ml-4">{{ product.title }}</span>
+        </div>
+
+        <div class="row bg-white m-3 p-2">
+
+            <div class="d-inline col-md-4 col-sm-12">
+
+                <img src="{% static '' %}{{ product.img }}" alt="Example" class="img-fluid"/>
+                <br>
+                <br>
+                 {% csrf_token %}
+                 <div class="col-sm-11 mt-2">
+                     <form name="uploadimages" method="post" enctype="multipart/form-data">
+    {#                      <label id="LabelImage" class="LabelImageMin"></label>#}
+                          <p> <input type="file" id="pct" name="f"></p>
+                          <label  id="LabelImage2" class="LabelImageFull"></label>
+    {#                     <button id="asdfasdf" >  asdfasdf</button>#}
+                     </form>
+                 </div>
+            </div>
+
+            <div class="d-inline col-md-8 col-sm-12">
+                <div class="row-centered">
+                    <div class="sm-col-12 lg-col-8 mx-auto">
+                        <input type="checkbox" checked id="hd-1" class="hide"/>
+                        <label for="hd-1" class="h3">Характеристики</label>
+                        <div class="row">
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Название</label>
+
+                            <div class="col-sm-12">
+                                <input class="form-control form-control-sm" id="title" value="{{ product.title }}">
+                            </div>
+
+                            <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Код товара</label>
+                            <div class="col-sm-12">
+                                <input class="form-control form-control-sm" id="code" placeholder="000000" value="{{ product.code }}">
+                            </div>
+
+                            <label for="colFormLabelSm" class="col-sm-5 col-form-label col-form-label-sm">Количество на складе</label>
+                            <div class="col-sm-12">
+                                <input class="form-control form-control-sm" id="balance" placeholder="0" value="{{ product.balance }}">
+                            </div>
+
+                            <label for="colFormLabelSm" class="col-sm-5 col-form-label col-form-label-sm">Описание товара</label>
+                            <div class="col-sm-12">
+                                  <textarea id="description" class="form-control text-justify"  rows="5">{{ product.description }}</textarea>
+                            </div>
+{#                            #}
+
+
+                            <div class="col-sm-12 text-center">
+
+                                {#<form name="test">#}
+{#                                {% csrf_token %}#}
+                                    <input type="submit" class="btn btn-success my-2" onclick="productAddSubmit()" name="name" value="Применить" />
+                                {#</form>#}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="bg-white mx-2 ">
+            <div class="row">
+
+            </div>
+
+
+        </div>
+        <!-- /.content-wrapper -->
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ block.super }}
+    <script src="{% static '' %}js/editButton/product.js"></script>
+    <script src="{% static '' %}js/productAdd.js"></script>
+{% endblock %}

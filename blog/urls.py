@@ -5,10 +5,15 @@ from . import views
 urlpatterns = [
     path('', views.base, name='asdf'),
 
+
     path('product', views.product, name='product'),
+
+    path('product/delete', views.product_delete, name='productDelete'),
 
 
     path('product/<int:idparam>/edit', views.productEdit, name='productEdit'),
+
+    path('product/add/', views.productAdd, name='producAdd'),
 
     path('product/<int:id>/', views.productPage, name='productPage'),
 

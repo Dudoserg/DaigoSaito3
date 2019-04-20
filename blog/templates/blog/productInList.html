@@ -3,7 +3,7 @@
 {% block productInList %}
 
     <!--очередной товар-->
-    <div class="row mt-3 mx-1">
+    <div class="row mt-3 mx-1"  id="product{{currentProduct.id}}">
         <div class="row d-block d-lg-none ml-2">
             <p class="myTextFont h5"> {{ currentProduct.title }}   </p>
         </div>
@@ -44,11 +44,11 @@
             <div class="col-lg-12 mx-auto col-8 d-inline d-lg-block my-2">
 {#                <a  href="{{ asset("product/#{currentProduct.id}/edit" ) }}" class="button btn btn-outline-warning fas fa-edit">Edit</a>#}
                 <a  href="{% url 'productEdit' idparam=currentProduct.id %}" class="button btn btn-outline-warning fas fa-edit">Edit</a>
-                <button type="button" class="btn btn-outline-danger fas fa-edit">Del</button>
+                <button type="button" data-item="{{currentProduct.id}}" onclick="btnDelete({{currentProduct.id}});" class="btn btn-outline-danger fas fa-edit ">Del</button>
             </div>
         </div>
     </div>
-    <div class="dropdown-divider"></div>
+    <div class="dropdown-divider" id="dropdown{{currentProduct.id}}"></div>
 
 {% endblock %}
 
