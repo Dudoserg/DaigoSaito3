@@ -4,7 +4,7 @@
         {% csrf_token %}
 {#        <button class="w-100 row  p-1 mx-auto" onclick="addInMap({{material.id}}, {{positionMap.getTechnologyMap.id}} )">#}
         {% csrf_token %}
-        <button class="w-100 row  p-1 mx-auto" onclick="addInMap({{material.id}}, {{positionMap.id}} )">
+        <button class="w-100 row  p-1 mx-auto" onclick="addInMap({{material.id}}, {{positionMap}} )">
 
             <div class=" row col-lg-4  d-inline my-auto">
                 <img src=" {% static '' %}{{ material.img }}" class="img-fluid">

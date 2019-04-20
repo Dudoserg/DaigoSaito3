@@ -108,12 +108,12 @@ def product(request):
         list = ids
         q_objects = Q()
         for item in list:
-            q_objects.add(Q(product_id=item), Q.OR)
+            q_objects.add(Q(id=item), Q.OR)##############################################################
         # получили все карты, в которых присутствуют нужные материалы
         map = Technology_map.objects.filter(q_objects)
         # получили все айдишники продуктов, в которых материалы нужные
         productId = []
-        [ productId.append(i.id) for i in map]
+        [ productId.append(i.product_id) for i in map]
 
         list = productId
         q_objects = Q()
@@ -241,10 +241,11 @@ def productEdit(request, idparam):
         map = map[0]
 
         positions = Technology_map_position.objects.filter(technology_map_id=map.id)
-
+        idishnik = map.id
         data = {'product' : product,
                 'materials' : materials,
-                'positions' : positions,}
+                'positions' : positions,
+                'idMap': idishnik}
 
         return render(request, 'blog/test.html', context=data)
     else:
@@ -254,10 +255,11 @@ def productEdit(request, idparam):
         technology_map.date_end = "2019-03-09"
         technology_map.product_id = idparam
         technology_map.save()
-
+        idishnik = technology_map.id
         data = {'product': product,
                 'materials': materials,
-                'positions': []}
+                'positions': [],
+                'idMap' : idishnik}
 
         return render(request, 'blog/test.html', context=data)
 # выполняет редактирование информации о продукте через Аjax
