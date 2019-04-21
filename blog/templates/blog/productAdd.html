@@ -23,16 +23,17 @@
         <div class="row bg-white m-3 p-2">
 
             <div class="d-inline col-md-4 col-sm-12">
-
-                <img src="{% static '' %}{{ product.img }}" alt="Example" class="img-fluid"/>
-                <br>
-                <br>
+{##}
+{#                <img src="{% static '' %}{{ product.img }}" alt="Example" class="img-fluid"/>#}
+{#                <br>#}
+{#                <br>#}
                  {% csrf_token %}
                  <div class="col-sm-11 mt-2">
                      <form name="uploadimages" method="post" enctype="multipart/form-data">
     {#                      <label id="LabelImage" class="LabelImageMin"></label>#}
-                          <p> <input type="file" id="pct" name="f"></p>
-                          <label  id="LabelImage2" class="LabelImageFull"></label>
+{#                            <label for="pct" class="btn-dark"> Выбрать изображение </label>#}
+                            <p> <input type="file" id="pct" name="f"></p>
+                            <label  id="LabelImage2" class="LabelImageFull"></label>
     {#                     <button id="asdfasdf" >  asdfasdf</button>#}
                      </form>
                  </div>
@@ -47,20 +48,20 @@
                             <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Название</label>
 
                             <div class="col-sm-12">
-                                <input class="form-control form-control-sm" id="title" value="{{ product.title }}">
+                                <input class="form-control form-control-sm" placeholder="Стул" id="title" value="{{ product.title }}">
                             </div>
 
                             <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Код товара</label>
                             <div class="col-sm-12">
-                                <input class="form-control form-control-sm" id="code" placeholder="000000" value="{{ product.code }}">
+                                <input class="form-control form-control-sm" id="code" placeholder="123456" value="{{ product.code }}">
                             </div>
 
                             <label for="colFormLabelSm" class="col-sm-5 col-form-label col-form-label-sm">Количество на складе</label>
                             <div class="col-sm-12">
-                                <input class="form-control form-control-sm" id="balance" placeholder="0" value="{{ product.balance }}">
+                                <input class="form-control form-control-sm" id="balance" placeholder="10" value="{{ product.balance }}">
                             </div>
 
-                            <label for="colFormLabelSm" class="col-sm-5 col-form-label col-form-label-sm">Описание товара</label>
+                            <label for="colFormLabelSm" class="col-sm-5 col-form-label col-form-label-sm"  >Описание товара</label>
                             <div class="col-sm-12">
                                   <textarea id="description" class="form-control text-justify"  rows="5">{{ product.description }}</textarea>
                             </div>
