@@ -375,14 +375,16 @@ def productEditPosition(request, idparam):
 
 def base(request):
 
-    username = auth.get_user(request).username
-    if username:
-        print("Пользователь ВОШЕЛ  " + str(username))
-    else:
-        print("Пользователя НЕТ")
-
+    # username = auth.get_user(request).username
+    # if username:
+    #     print("Пользователь ВОШЕЛ  " + str(username))
+    # else:
+    #     print("Пользователя НЕТ")
+    #
+    # data = { 'username': auth.get_user(request).username}
+    # return render(request, 'blog/example/post_list.html', context=data)
     data = { 'username': auth.get_user(request).username}
-    return render(request, 'blog/example/post_list.html', context=data)
+    return render(request, 'blog/example/start.html', context=data)
 
 @csrf_exempt
 def product_delete(request):
