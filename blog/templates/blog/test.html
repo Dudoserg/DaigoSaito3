@@ -27,12 +27,12 @@
                  {% csrf_token %}
                  <form enctype="multipart/form-data" method="post">
                      <p>
-                        <div id="btn">
-                            <label for="files">Выбрать</label>
-                        </div>
-                        <div id="ok">
-                            <label for="buttonOk">Загрузить</label>
-                        </div>
+{#                        <div id="btn">#}
+                            <label for="files" class="btn btn-dark">Выбрать</label>
+{#                        </div>#}
+{#                        <div id="ok">#}
+                            <label for="buttonOk" class="btn btn-dark">Загрузить</label>
+{#                        </div>#}
                         <input id="files" style="visibility:hidden;" name="image" accept="image/*" type="file">
                         <br>
                         <input id="buttonOk" style="visibility:hidden;" type="submit" value="Отправить">
@@ -71,7 +71,7 @@
 
                                 {#<form name="test">#}
                                 {% csrf_token %}
-                                    <input type="submit" class="btn btn-success my-2" onclick="saveInfo( {{ product.id }})" name="name" value="Применить" />
+                                    <input type="submit" class="btn btn-dark my-2" onclick="saveInfo( {{ product.id }})" name="name" value="Применить" />
                                 {#</form>#}
 
                             </div>
@@ -81,7 +81,7 @@
                         <input type="checkbox"  id="hd-2" class="hide"/>
                         <label for="hd-2" class="h3">Технологическая карта</label>
                         <div>
-                            <button type="button" class="btn btn-success w-100" data-toggle="dropdown">
+                            <button type="button" class="btn btn-dark w-100" data-toggle="dropdown">
                                 <span class="lg-col-12 sm-col-4 h1"> <i class="fas fa-plus-circle"></i> Добавить материал</span>
                             </button>
                             <ul class="dropdown-menu scrollable-menu w-50" role="menu">
