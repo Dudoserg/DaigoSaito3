@@ -188,12 +188,14 @@ def productPage(request, id):
         print("productTitle" + str(product.title))
 
         data = {'product' : product,
-                'mapPositions' : map_position
+                'mapPositions' : map_position,
+                'username': auth.get_user(request).username
                 }
         return render(request, 'blog/product.html', context=data)
     else:
         data = {'product': product,
-                'mapPositions': []
+                'mapPositions': [],
+                'username': auth.get_user(request).username
                 }
         return render(request, 'blog/product.html', context=data)
 
@@ -253,7 +255,7 @@ def productEdit(request, idparam):
         data = {'product' : product,
                 'materials' : materials,
                 'positions' : positions,
-                'idMap': idishnik}
+                'idMap': idishnik, 'username' :auth.get_user(request).username}
 
         return render(request, 'blog/test.html', context=data)
     else:
@@ -267,7 +269,7 @@ def productEdit(request, idparam):
         data = {'product': product,
                 'materials': materials,
                 'positions': [],
-                'idMap' : idishnik}
+                'idMap' : idishnik, 'username' :auth.get_user(request).username}
 
         return render(request, 'blog/test.html', context=data)
 # выполняет редактирование информации о продукте через Аjax
@@ -276,7 +278,9 @@ def productEditajax(request, idparam):
     # print("startEditAjax")
     # print(idparam)
 
-
+    username = auth.get_user(request).username
+    if not username:
+        return render(request, 'blog/NoAccess.html')
 
     title = request.POST['title']
     #print(title)
@@ -301,6 +305,11 @@ def productEditajax(request, idparam):
 
 @csrf_exempt
 def productAddMaterial(request, idparam):
+
+    username = auth.get_user(request).username
+    if not username:
+        return render(request, 'blog/NoAccess.html')
+
     amount = 1
     material_id = request.POST['idMaterial']
     technology_map_id = request.POST['idMap']
@@ -317,12 +326,16 @@ def productAddMaterial(request, idparam):
 
     technology_map_position.save()
 
-    data = {'positionMap': technology_map_position}
+    data = {'positionMap': technology_map_position, 'username' :auth.get_user(request).username}
 
     return render(request, 'blog/onePositionMap.html', context=data)
 
 @csrf_exempt
 def productEditPosition(request, idparam):
+    username = auth.get_user(request).username
+    if not username:
+        return render(request, 'blog/NoAccess.html')
+
     print("id == " + str(request.POST['id']))
     idMaterial = request.POST['id']
     amount = int(request.POST['amount'])
@@ -368,10 +381,16 @@ def base(request):
     else:
         print("Пользователя НЕТ")
 
-    return render(request, 'blog/example/post_list.html')
+    data = { 'username': auth.get_user(request).username}
+    return render(request, 'blog/example/post_list.html', context=data)
 
 @csrf_exempt
 def product_delete(request):
+
+    username = auth.get_user(request).username
+    if not username:
+        return render(request, 'blog/NoAccess.html')
+
     if request.POST.get('num'):
         num =  request.POST['num']
         print(num)
@@ -383,6 +402,10 @@ def product_delete(request):
 
 @csrf_exempt
 def productAdd(request):
+
+    username = auth.get_user(request).username
+    if not username:
+        return render(request, 'blog/NoAccess.html')
 
     if 'title' in request.POST and 'code' in request.POST and 'balance' in request.POST and 'description' in request.POST:
         lenght = len(request.FILES)
@@ -409,10 +432,8 @@ def productAdd(request):
             newProduct.img = "img/" + name
             newProduct.save()
 
-
-
-
-    return render(request, 'blog/productAdd.html')
+    data = {'username': auth.get_user(request).username}
+    return render(request, 'blog/productAdd.html', context=data)
 
 
 def saveFile(up_file):

@@ -1,0 +1,37 @@
+{% extends "blog/basePage.html" %}
+{#{% use "productInList.html" %}#}
+{% load staticfiles %}
+{%  block stylesheets %}
+   {{ block.super }}
+    <link rel="stylesheet" href="{% static "css/mySelect.css" %}" />
+{%  endblock %}
+
+{% block content%}
+    <div id="content-wrapper" class="myColorElem bg-white" >
+        <div class="row mx-2">
+
+            <div class="col-lg-6 h2 mx-auto"> Нет доступа</div>
+
+        </div>
+        <div class="row mx-2">
+            <div class="col-lg-6 h6 mx-auto"> У вас нет прав для доступа на эту страницу</div>
+        </div>
+        <div class="row mx-2">
+             <div class="col-lg-6 h6 mx-auto">
+                 <a href="{% url "login" %}" class="btn btn-dark">
+                     Login Page
+                 </a>
+             </div>
+
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ block.super }}
+    <script src="{% static 'js/kek.js' %}"></script>
+{% endblock %}
