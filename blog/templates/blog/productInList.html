@@ -43,8 +43,17 @@
             <div class="col-lg-12 mx-auto col-4 d-inline d-lg-block">  Наличие: {{ currentProduct.balance }}шт  </div>
             <div class="col-lg-12 mx-auto col-8 d-inline d-lg-block my-2">
 {#                <a  href="{{ asset("product/#{currentProduct.id}/edit" ) }}" class="button btn btn-outline-warning fas fa-edit">Edit</a>#}
-                <a  href="{% url 'productEdit' idparam=currentProduct.id %}" class="button btn btn-outline-warning fas fa-edit">Edit</a>
-                <button type="button" data-item="{{currentProduct.id}}" onclick="btnDelete({{currentProduct.id}});" class="btn btn-outline-danger fas fa-edit ">Del</button>
+                 {% if username %}
+                     <a  href="{% url 'productEdit' idparam=currentProduct.id %}" class="button btn btn-outline-warning fas fa-edit">
+                         Edit
+                     </a>
+                     <button type="button" data-item="{{currentProduct.id}}" onclick="btnDelete({{currentProduct.id}});" class="btn btn-outline-danger fas fa-edit ">
+                         Del
+                     </button>
+                 {% else %}
+
+                 {% endif %}
+
             </div>
         </div>
     </div>

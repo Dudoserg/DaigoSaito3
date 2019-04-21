@@ -40,7 +40,6 @@
       </div>
     </div>
     <div id="content-wrapper" class="myColorElem bg-white" >
-
         <div class="row mx-2">
             <div class="col-lg-12">
 {#                 <form method="get">#}
@@ -85,9 +84,13 @@
                 <div id="" class="col-lg-2 row" >
                     <div id="" class="col-lg-2 " > </div>
                     <div id="" class="col-lg-10 " >
-                          <a  href="{% url 'producAdd' %}" class="btn btn-outline-success fas fa-edit">
+                        {% if username %}
+                             <a  href="{% url 'producAdd' %}" class="btn btn-outline-success fas fa-edit">
                               Add
                           </a>
+                        {% else %}
+                        {% endif %}
+
                     </div>
 
                 </div>

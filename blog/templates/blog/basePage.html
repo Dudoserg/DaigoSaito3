@@ -80,9 +80,18 @@
             <!--Логин -->
 
             <li class="nav-item dropdown no-arrow">
-                <a class="nav-link " href="login.html" id="userDropdown" role="button" >
-                    <i class="fas fa-user-circle fa-fw"> </i>LogIn
-                </a>
+                {% if username %}
+{#                    user tut#}
+                       <a class="nav-link " href="{% url 'logout' %}" id="userDropdown" role="button" >
+                            <i class="fas fa-user-circle fa-fw"> </i>LogOut
+                       </a>
+                {% else %}
+{#                    usera tut NET#}
+                       <a class="nav-link " href="{% url 'login' %}" id="userDropdown" role="button" >
+                            <i class="fas fa-user-circle fa-fw"> </i>LogIn
+                       </a>
+                {% endif %}
+
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="#">Settings</a>
                     <a class="dropdown-item" href="#">Activity Log</a>

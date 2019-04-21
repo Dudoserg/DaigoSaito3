@@ -28,7 +28,11 @@ import io
 import os
 
 import json
+
+from django.contrib import auth
 from django.db.models import Count
+
+
 # Create your views here.
 
 
@@ -146,14 +150,12 @@ def product(request):
         products = products.filter(q_objects)
 
 
-
-
         allMaterials = Material.objects.all()
-        data = {'products': products, 'materials': allMaterials}
+        data = {'products': products, 'materials': allMaterials, 'username' :auth.get_user(request).username}
         return render(request, 'blog/search.html', context=data)
     else:
         allMaterials = Material.objects.all()
-        data = {'products': products, 'materials': allMaterials}
+        data = {'products': products, 'materials': allMaterials,  'username' :auth.get_user(request).username}
         return render(request, 'blog/allProduct.html', context=data)
 
 def foobar(json1):
@@ -198,6 +200,12 @@ def productPage(request, id):
 # Cтраница для редактирования продукта
 @csrf_exempt
 def productEdit(request, idparam):
+
+    username = auth.get_user(request).username
+    if not username:
+        return render(request, 'blog/NoAccess.html')
+
+
     product = Product.objects.filter(id= idparam)
     product = product[0]
 
@@ -353,6 +361,13 @@ def productEditPosition(request, idparam):
 #     )
 
 def base(request):
+
+    username = auth.get_user(request).username
+    if username:
+        print("Пользователь ВОШЕЛ  " + str(username))
+    else:
+        print("Пользователя НЕТ")
+
     return render(request, 'blog/example/post_list.html')
 
 @csrf_exempt
