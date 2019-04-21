@@ -17,7 +17,7 @@ def login(request):
         user = auth.authenticate(username=username, password=password)
         if user is not None:
             auth.login(request,user)
-            return redirect('product')
+            return redirect('basePage')
         else:
             args['login_error'] = "пользователь не найден"
             return  render_to_response('loginsys/login.html',args)
@@ -29,4 +29,5 @@ def login(request):
 @csrf_exempt
 def logout(request):
     auth.logout(request)
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    # return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return redirect('basePage')
